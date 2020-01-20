@@ -23,18 +23,18 @@ enum WeatherType: String {
 }
 
 class DailyWeatherModel {
-    var tempatureHigh: Double = 0.0
-    var tempatureLow: Double = 0.0
+    var tempatureHigh: Int = 0
+    var tempatureLow: Int = 0
     var date = Date()
     var weekday: String = ""
     var weatherType: WeatherType
     var summary: String = ""
 
     init(json: JSON) {
-        self.tempatureHigh = json["temperatureHigh"].doubleValue
-        self.tempatureLow = json["temperatureLow"].doubleValue
+        self.tempatureHigh = Int(json["temperatureHigh"].doubleValue)
+        self.tempatureLow = Int(json["temperatureLow"].doubleValue)
         self.date = Date(timeIntervalSince1970: json["time"].doubleValue)
         self.weatherType = WeatherType(rawValue: json["icon"].stringValue) ?? .ClearDay
-        self.summary = json["summary"].stringValue ?? "" 
+        self.summary = json["summary"].stringValue 
     }
 }

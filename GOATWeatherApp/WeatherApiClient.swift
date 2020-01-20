@@ -14,6 +14,7 @@ class WeatherApiClient {
     private static let key = "caf1edcf83561fbf16ef486924e94bc0"
     private static let losAngelesCoordinates = (34.0522, 118.2437)
     private static let londonCoordinates = (51.5074, 0.1278)
+    
     var coordinates = WeatherApiClient.londonCoordinates
     
     func getLosAngelesForecast(completion: @escaping ([DailyWeatherModel] , NSError?) -> Void) {
@@ -27,7 +28,6 @@ class WeatherApiClient {
                         let forecastJSON = json["daily"]["data"]
                         for entry in forecastJSON {
                             let model = DailyWeatherModel(json: entry.1)
-                            print(entry)
                             forecast.append(model)
                         }
                         completion(forecast, nil)
