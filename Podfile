@@ -5,5 +5,6 @@ target 'GOATWeatherApp' do
 
   # Pods for GOATWeatherApp
   pod 'Alamofire'
+  pod 'SwiftyJSON'
 
 end
