@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -100,6 +101,7 @@
                                     <outlet property="highTempLabel" destination="OVW-nA-abD" id="f0m-2S-1cV"/>
                                     <outlet property="iconImageView" destination="rhu-RU-UKO" id="15f-hz-IyF"/>
                                     <outlet property="lowTempLabel" destination="rhl-CN-Lev" id="HWS-ws-9LT"/>
+                                    <segue destination="SSP-OT-qEx" kind="show" id="0Qh-em-vzM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -113,6 +115,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhK-Op-5b7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-588.40579710144937" y="109.82142857142857"/>
+        </scene>
+        <!--Weather Detail View Controller-->
+        <scene sceneID="swt-Qf-ggt">
+            <objects>
+                <viewController id="SSP-OT-qEx" customClass="WeatherDetailViewController" customModule="GOATWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bp6-ah-q2J">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQc-LO-UrL">
+                                <rect key="frame" x="57" y="435" width="300" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="6cV-iU-biD"/>
+                                    <constraint firstAttribute="width" constant="300" id="JDN-Og-7s5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yQc-LO-UrL" firstAttribute="centerY" secondItem="5Lc-mb-CpP" secondAttribute="centerY" id="JBJ-WY-bIj"/>
+                            <constraint firstItem="yQc-LO-UrL" firstAttribute="centerX" secondItem="5Lc-mb-CpP" secondAttribute="centerX" id="hJK-Dw-OlN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5Lc-mb-CpP"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ref-xE-BMv"/>
+                    <connections>
+                        <outlet property="summaryLabel" destination="yQc-LO-UrL" id="nfe-d0-4JR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0vS-97-5uo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="220.28985507246378" y="110.49107142857143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5W2-kw-u9A">

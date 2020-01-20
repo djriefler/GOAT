@@ -28,11 +28,13 @@ class DailyWeatherModel {
     var date = Date()
     var weekday: String = ""
     var weatherType: WeatherType
+    var summary: String = ""
 
     init(json: JSON) {
         self.tempatureHigh = json["temperatureHigh"].doubleValue
         self.tempatureLow = json["temperatureLow"].doubleValue
         self.date = Date(timeIntervalSince1970: json["time"].doubleValue)
         self.weatherType = WeatherType(rawValue: json["icon"].stringValue) ?? .ClearDay
+        self.summary = json["summary"].stringValue ?? "" 
     }
 }

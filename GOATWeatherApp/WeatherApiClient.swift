@@ -11,12 +11,14 @@ import Alamofire
 import SwiftyJSON
 
 class WeatherApiClient {
-    private let key = "caf1edcf83561fbf16ef486924e94bc0"
-    private let losAngelesCoordinates = (34.0522, 118.2437)
+    private static let key = "caf1edcf83561fbf16ef486924e94bc0"
+    private static let losAngelesCoordinates = (34.0522, 118.2437)
+    private static let londonCoordinates = (51.5074, 0.1278)
+    var coordinates = WeatherApiClient.londonCoordinates
     
     func getLosAngelesForecast(completion: @escaping ([DailyWeatherModel] , NSError?) -> Void) {
         var forecast: [DailyWeatherModel] = []
-        Alamofire.request(URL(string: "https://api.darksky.net/forecast/\(key)/\(losAngelesCoordinates.0),\(losAngelesCoordinates.1)")!)
+        Alamofire.request(URL(string: "https://api.darksky.net/forecast/\(WeatherApiClient.key)/\(coordinates.0),\(coordinates.1)")!)
             .validate()
             .response { (response) in
                 if let data = response.data {

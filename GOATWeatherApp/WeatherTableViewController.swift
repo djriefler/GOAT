@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherTableViewController: UITableViewController {
 
@@ -14,9 +15,19 @@ class WeatherTableViewController: UITableViewController {
     var weatherForecast: [DailyWeatherModel] = []
     private let reuseIdentifier = "WeatherCell"
     private let dateFormatter = DateFormatter()
+    private var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let navBarItem = UIBarButtonItem(image: UIImage(named: "clear-day"), style: .plain, target: self, action: #selector(askPermissions))
+        self.navigationItem.rightBarButtonItem = navBarItem
+        
+        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        dateFormatter.timeZone = .current
+    }
+    
+    func loadWeather() {
         weatherApiClient.getLosAngelesForecast() { (forecast, err) in
             DispatchQueue.main.async(execute: { [weak self] in
                 self?.weatherForecast = forecast
@@ -24,16 +35,24 @@ class WeatherTableViewController: UITableViewController {
                 self?.tableView.reloadData()
             })
         }
-        
-        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
-        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
-        dateFormatter.timeZone = .current
     }
 
     func setFormattedDates() {
         for day in weatherForecast {
             let weekdayInt = Calendar.current.component(.weekday, from: day.date) - 1
             day.weekday = dateFormatter.weekdaySymbols[weekdayInt]
+        }
+    }
+    
+    @objc func askPermissions() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? WeatherDetailViewController, let index = tableView.indexPathForSelectedRow {
+            vc.dailyWeather = weatherForecast[index.row]
         }
     }
 }
@@ -70,5 +89,24 @@ extension WeatherTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 86
+    }
+}
+
+extension WeatherTableViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            manager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            weatherApiClient.coordinates = (location.coordinate.latitude, location.coordinate.longitude)
+            loadWeather()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

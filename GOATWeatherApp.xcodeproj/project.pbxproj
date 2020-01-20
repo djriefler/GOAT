@@ -10,6 +10,7 @@
 		20B72015A82A011A1B236929 /* Pods_GOATWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58F1EA0ED0F89273EA434DB /* Pods_GOATWeatherApp.framework */; };
 		7EA0F41C23D559DF006DD371 /* WeatherApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0F41B23D559DF006DD371 /* WeatherApiClient.swift */; };
 		7EA0F41E23D56C12006DD371 /* DailyWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0F41D23D56C12006DD371 /* DailyWeatherModel.swift */; };
+		7EA0F42423D59697006DD371 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0F42323D59697006DD371 /* WeatherDetailViewController.swift */; };
 		7EF8982B23D517A300FB923A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8982A23D517A300FB923A /* AppDelegate.swift */; };
 		7EF8982D23D517A300FB923A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8982C23D517A300FB923A /* SceneDelegate.swift */; };
 		7EF8982F23D517A300FB923A /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8982E23D517A300FB923A /* WeatherTableViewController.swift */; };
@@ -23,6 +24,7 @@
 		0D1468B02A87800ACBC9E354 /* Pods-GOATWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOATWeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-GOATWeatherApp/Pods-GOATWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7EA0F41B23D559DF006DD371 /* WeatherApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiClient.swift; sourceTree = "<group>"; };
 		7EA0F41D23D56C12006DD371 /* DailyWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherModel.swift; sourceTree = "<group>"; };
+		7EA0F42323D59697006DD371 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		7EF8982723D517A300FB923A /* GOATWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GOATWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF8982A23D517A300FB923A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EF8982C23D517A300FB923A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				7EF8982A23D517A300FB923A /* AppDelegate.swift */,
 				7EF8982C23D517A300FB923A /* SceneDelegate.swift */,
 				7EF8982E23D517A300FB923A /* WeatherTableViewController.swift */,
+				7EA0F42323D59697006DD371 /* WeatherDetailViewController.swift */,
 				7EA0F41B23D559DF006DD371 /* WeatherApiClient.swift */,
 				7EA0F41D23D56C12006DD371 /* DailyWeatherModel.swift */,
 				7EF8983E23D5193F00FB923A /* WeatherTableViewCell.swift */,
@@ -218,6 +221,7 @@
 				7EF8983F23D5193F00FB923A /* WeatherTableViewCell.swift in Sources */,
 				7EA0F41C23D559DF006DD371 /* WeatherApiClient.swift in Sources */,
 				7EA0F41E23D56C12006DD371 /* DailyWeatherModel.swift in Sources */,
+				7EA0F42423D59697006DD371 /* WeatherDetailViewController.swift in Sources */,
 				7EF8982F23D517A300FB923A /* WeatherTableViewController.swift in Sources */,
 				7EF8982B23D517A300FB923A /* AppDelegate.swift in Sources */,
 				7EF8982D23D517A300FB923A /* SceneDelegate.swift in Sources */,
