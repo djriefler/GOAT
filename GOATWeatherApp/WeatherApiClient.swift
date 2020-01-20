@@ -17,7 +17,7 @@ class WeatherApiClient {
     
     var coordinates = WeatherApiClient.londonCoordinates
     
-    func getLosAngelesForecast(completion: @escaping ([DailyWeatherModel] , NSError?) -> Void) {
+    func getLosAngelesForecast(completion: @escaping (Result<[DailyWeatherModel]>) -> Void) {
         var forecast: [DailyWeatherModel] = []
         Alamofire.request(URL(string: "https://api.darksky.net/forecast/\(WeatherApiClient.key)/\(coordinates.0),\(coordinates.1)")!)
             .validate()
@@ -30,10 +30,10 @@ class WeatherApiClient {
                             let model = DailyWeatherModel(json: entry.1)
                             forecast.append(model)
                         }
-                        completion(forecast, nil)
+                        completion(.success(forecast))
                     }
                     catch {
-                        completion(forecast, NSError())
+                        completion(.failure(NSError()))
                     }
                 }
         }

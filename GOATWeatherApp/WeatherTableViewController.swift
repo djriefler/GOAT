@@ -11,11 +11,12 @@ import CoreLocation
 
 class WeatherTableViewController: UITableViewController {
 
-    let weatherApiClient = WeatherApiClient()
-    var weatherForecast: [DailyWeatherModel] = []
+    private let weatherApiClient = WeatherApiClient()
+    private var weatherForecast: [DailyWeatherModel] = []
     private let reuseIdentifier = "WeatherCell"
     private let dateFormatter = DateFormatter()
     private var locationManager = CLLocationManager()
+    private let cellHeight: CGFloat = 86
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +26,29 @@ class WeatherTableViewController: UITableViewController {
         dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
         dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
         dateFormatter.timeZone = .current
+        
+        locationManager.delegate = self
+        if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
     }
     
     func loadWeather() {
-        weatherApiClient.getLosAngelesForecast() { (forecast, err) in
+        weatherApiClient.getLosAngelesForecast() { (result) in
             DispatchQueue.main.async(execute: { [weak self] in
-                self?.weatherForecast = forecast
-                self?.setFormattedDates()
-                self?.tableView.reloadData()
+                switch result {
+                case .success(let forecast):
+                    self?.weatherForecast = forecast
+                    self?.setFormattedDates()
+                    self?.tableView.reloadData()
+                case .failure(let err):
+                    print(err)
+                }
             })
         }
     }
 
+    // Date formatting done here because DateFormatter object is expensive to create so we create it once in the view controller and format dates from here
     func setFormattedDates() {
         for day in weatherForecast {
             let weekdayInt = Calendar.current.component(.weekday, from: day.date) - 1
@@ -45,8 +57,6 @@ class WeatherTableViewController: UITableViewController {
     }
     
     @objc func askPermissions() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
     
@@ -55,11 +65,6 @@ class WeatherTableViewController: UITableViewController {
             vc.dailyWeather = weatherForecast[index.row]
         }
     }
-}
-
-// MARK - UITableViewDelegate
-extension WeatherTableViewController {
-    
 }
 
 // MARK - UITableViewDataSource
@@ -88,7 +93,7 @@ extension WeatherTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 86
+        return cellHeight
     }
 }
 
